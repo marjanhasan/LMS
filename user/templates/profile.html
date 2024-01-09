@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h1 class="text-center mt-3">Update Your Profile</h1>
+  <div class="d-flex justify-content-center align-content-center align-items-center text-center gap-4 m-5 mt-4">
+    <a href="{% url 'editprofile' %}" class="btn btn-light">Edit Profile</a>
+    <a href="{% url 'editpassword' %}" class="btn btn-light">Edit Password</a>
+  </div>
+  <hr />
+  <h1 class="text-center">Purchase History</h1>
+  <table class="table table-bordered border-primary mt-4">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Category</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">Date</th>
+        <th scope="col">Return</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for val in data %}
+        <tr>
+          <th scope="row">{{ val.id }}</th>
+          <td>{{ val.book.title }}</td>
+          <td>{{ val.book.description|truncatewords:10 }}</td>
+          <td>{{ val.book.category.name }}</td>
+          <td>{{ val.book.quantity }}</td>
+          <td>{{ val.book.price }}</td>
+          <td>{{ val.purchase_date }}</td>
+          <td>
+            <a href="{% url 'return' id=val.book.id userid=request.user.id buyid=val.id %}" class="btn btn-light">Return</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
