@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import dj_database_url
 from pathlib import Path
 import environ
 
@@ -83,11 +83,18 @@ WSGI_APPLICATION = "lms.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
+""" DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
+} """
+
+DATABASES = {
+    "default": dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default="postgres://lms_w062_user:gq2vato5DeUi4ZENcF9S497MUN0egAvL@dpg-cmf9s4v109ks73ceo56g-a.oregon-postgres.render.com/lms_w062",
+    )
 }
 
 
